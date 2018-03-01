@@ -6,8 +6,8 @@ import java.nio.file.*;
 import java.util.*;
 
 public class RandomWriter {
-    private Scanner inputFile;
-    private Map<Queue<String>,ArrayList<String >> dic;
+    public Scanner inputFile;
+    public Map<Queue<String>,ArrayList<String >> dic;
     public static void main(String[] args) throws IOException{
         RandomWriter randomWriter=new RandomWriter();
         randomWriter.init();
@@ -15,13 +15,13 @@ public class RandomWriter {
         randomWriter.start();
         System.exit(0);
     }
-    private void init() throws IOException{
+    public void init() throws IOException{
         String fileName;
         Scanner in=new Scanner(System.in);
         System.out.println("Please input the file:");
         fileName=in.next();
         inputFile=new Scanner(new File(fileName));
-        System.out.println(inputFile.next());
+        //System.out.println(inputFile.next());
         //out=new PrintWriter("123
         //out.println("123");
         //out.close();
@@ -33,7 +33,7 @@ public class RandomWriter {
         //in.close();
         //File file=new File(fileName);
     }
-    private void process(){
+    public void process(){
         int N;
         String sub;
         dic=new HashMap<Queue<String>, ArrayList<String>>();
@@ -55,9 +55,9 @@ public class RandomWriter {
             key.remove();
             key.add(sub);
         }
-        System.out.println(dic.size());
+        //System.out.println(dic.size());
     }
-    private Queue<String> getStart(){
+    public Queue<String> getStart(){
         long nr= (int) (System.currentTimeMillis()%dic.size());
         int i=0;
         for(Queue<String> queue: dic.keySet()){
@@ -66,7 +66,7 @@ public class RandomWriter {
         }
         return null;
     }
-    private void start(){
+    public void start(){
         while(true) {
             Queue<String> queue = getStart();
             Scanner in=new Scanner(System.in);
