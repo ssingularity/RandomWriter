@@ -18,18 +18,20 @@ public class RandomWriter {
     private void init() throws IOException{
         String fileName;
         Scanner in=new Scanner(System.in);
-        PrintWriter out=new PrintWriter(System.out);
-        out.println("Please input the file:");
+        System.out.println("Please input the file:");
         fileName=in.next();
-        //out=new PrintWriter("123");
+        inputFile=new Scanner(new File(fileName));
+        System.out.println(inputFile.next());
+        //out=new PrintWriter("123
         //out.println("123");
         //out.close();
-        inputFile=new Scanner(new File(fileName));
+        //inputFile=new Scanner(Paths.get(fileName));
         //while (in.hasNextLine()){
         //    out.println("1");
         //    out.print(in.nextLine());
         //}
         //in.close();
+        //File file=new File(fileName);
     }
     private void process(){
         int N;
@@ -40,16 +42,20 @@ public class RandomWriter {
         System.out.println("Please input the N (N>=2):");
         Scanner in=new Scanner(System.in);
         N=in.nextInt();
+        System.out.println(inputFile.hasNext());
         for (int i=0;i<N-1;i++){
             key.add(inputFile.next());
         }
         while(inputFile.hasNext()){
             sub=inputFile.next();
-            value=dic.getOrDefault(key,new ArrayList<>()); value.add(sub);
+            value=dic.getOrDefault(key,new ArrayList<>());
+            value.add(sub);
+            dic.put(key,value);
             key=new LinkedList<>(key);
             key.remove();
             key.add(sub);
         }
+        System.out.println(dic.size());
     }
     private Queue<String> getStart(){
         long nr= (int) (System.currentTimeMillis()%dic.size());
@@ -67,12 +73,14 @@ public class RandomWriter {
             System.out.println("# input random words to generate (0 to quit):");
             int N=in.nextInt();
             if (N==0) break;
+            for (String s:queue) System.out.print(s+" ");
             while (N!=0){
+                //System.out.println(N);
                 Queue<String> sub=new LinkedList<>(queue);
                 ArrayList<String> arrayList = dic.get(sub);
                 int nr = (int) (System.currentTimeMillis() % arrayList.size());
                 String val = arrayList.get(nr);
-                for (String s:sub) System.out.print(s+" ");
+                System.out.print(val+" ");
                 sub.remove();
                 sub.add(val);
                 queue=sub;
